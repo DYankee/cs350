@@ -1,27 +1,36 @@
 <!--
 Author: Zachary Geary - Gearyz
-Assignment: User Home Page Setup
+Assignment: HW9_Deductive_Databases
 Section: T/TH 10am-12pm
-Due Date: 2025/09/05
-Finished Date: 2025/09/05
-Location: ~/gearyz/www/cs3501
+Due Date:
+Finished Date:
+Location: ~/gearyz/www/cs350/hw/HW09
 -->
+
+<!-- Function to load external data -->
+<script>
+  function loadText(){
+    console.log();
+    fetch('hw01.txt')
+        .then(res => res.text())
+        .then(text => {
+          const insertAt = document.querySelector('#file-contents')
+          insertAt.textContent = text;
+        })  }
+
+  // window.onload = loadText();
+</script>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>Zack's COCOM Home Page</title>
+  <title>HW9_Deductive_Databases</title>
   <meta name="viewport" content="width=device-width, inital-scale=1.0, viewport-fit=cover">
-  <link rel="stylesheet" type="text/css" href="assets/index.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/index.css">
 </head>
 
 <body>
-  <audio id="audio1" src="assets/beep1.mp3" preload="auto"></audio>
-  <audio id="audio2" src="assets/beep2.mp3" preload="auto"></audio>
-  <audio id="audio3" src="assets/beep3.mp3" preload="auto"></audio>
-  <audio id="audio4" src="assets/beep4.mp3" preload="auto"></audio>
-
   <section class="wrap-standard" id="column-3">
     <div class="wrap">
       <div class="left-frame-top">
@@ -303,10 +312,10 @@ Location: ~/gearyz/www/cs3501
 						*** MAIN NAVIGATION BUTTONS ***
 						Replace the hashtag '#' with a real URL (or not).
 						If you don't want sound effects, replace the <button> element with a basic <a> tag shown here in this comment:
-            <button onclick="playSoundAndRedirect('audio2', 'http://67.253.173.33/~gearyz')">Home</button>
-            <button onclick="playSoundAndRedirect('audio2', 'http://67.253.173.33/~gearyz/cs350/home.html')">CS350</button>
-            <button onclick="playSoundAndRedirect('audio2', 'http://67.253.173.33/~gearyz/cs330/home.html')">CS330</button>
-            <button onclick="playSoundAndRedirect('audio2', '')">?</button>
+						<a href="#">01</a>
+						<a href="#">02</a>
+						<a href="#">03</a>
+						<a href="#">04</a>
 						-->
             <a href="http://67.253.173.33/~gearyz">Home</a>
             <a href="http://67.253.173.33/~gearyz/cs350/home.html">CS350</a>
@@ -355,34 +364,19 @@ Location: ~/gearyz/www/cs3501
         </div>
         <main>
           <!-- Start your content here. -->
-          <h1>Zack's Home Page</h1>
-          <h2>Home for all my cocoM classes</h2>
 
-          <div id="About-me">
-            <div class="pics-right">
-              <img src="assets/headshot.png" alt="headshot">
-              <p class="caption">My Graduation from Occ</p>
-            </div>
-            <div class="lcars-text-bar">
-              <span>About me</span>
-            </div>
-            <div>
-              <p>
-                I am currently attending SUNY Polytechnic full time pursuing a CS degree. When I have free time I enjoy learning about new technologies and designing/writing software for myself. I also run and maintain a home server that hosts my personal websites, cloud storage, and gaming servers.
-              </p>
-            </div>
+          <div>
+            <h1>HW9_Deductive_Databases</h1>
+            <p>
+              Files, images, and other work related to HW09.
+            </p>
           </div>
 
-          <div id="projects">
+          <div>
             <div class="lcars-text-bar">
-              <span>My other Projects</span>
+              <span></span>
             </div>
-            <ul class="lcars-list">
-              <li><a href="https://zgeary.dev/">My Portfolio</a></li>
-              <li><a href="https://woa.zgeary.dev/">World Of AI Art</a></li>
-              <li><a href="https://occ-connect.zgeary.dev/">OCC Connect</a></li>
-              <li><a href="https://dota.zgeary.dev/">Dota 2 Fan Site</a></li>
-            </ul>
+            <pre id="file-contents" onload="loadText('')"></pre>
           </div>
 
             <!-- End content area. -->
@@ -397,7 +391,7 @@ Location: ~/gearyz/www/cs3501
       </div>
     </div>
   </section>
-  <script type="text/javascript" src="assets/lcars.js"></script>
+  <script type="text/javascript" src="../../assets/lcars.js"></script>
   <div class="headtrim"> </div>
   <div class="baseboard"> </div>
 </body>
