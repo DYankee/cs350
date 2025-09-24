@@ -374,6 +374,99 @@ Location: ~/gearyz/www/cs350/hw/HW02
 
           <div>
             <div class="lcars-text-bar">
+              <span>Part 2 - Relational Model</span>
+            </div>
+
+            <div>
+              <h2>3.19</h2>
+              <p>
+                Consider a STUDENT relation in a UNIVERSITY database with the following
+                attributes (Name, Ssn, Local_phone, Address, Cell_phone, Age, Gpa). Note that
+                the cell phone may be from a different city and state (or province) from the
+                local phone. A possible tuple of the relation is shown below:
+              </p>
+                <table>
+                  <tr>
+                    <th>Name</th>
+                    <th>Ssn</th>
+                    <th>Local_phone</th>
+                    <th>Address</th>
+                    <th>Cell_phone</th>
+                    <th>Age</th>
+                    <th>GPA</th>
+                  </tr>
+                  <tr>
+                    <td>George Shaw William Edwards</td>
+                    <td>123-45-6789</td>
+                    <td>555-1234</td>
+                    <td>
+                      123 Main St.,
+                      Anytown, CA 94539
+                    </td>
+                    <td>19</td>
+                    <td>555-4321</td>
+                    <td>3.75</td>
+                  </tr>
+                </table>
+              <ul>
+                <li>
+                  <h3>
+                    a. Identify the critical missing information from the Local_phone and
+                    Cell_phone attributes. (Hint: How do you call someone who lives in a different state or province?)
+                  </h3>
+                  <p>
+                    Answer: They are Both missing the area & country code
+                  </p>
+                </li>
+                <li>
+                  <h3>
+                    b. Would you store this additional information in the Local_phone and
+                    Cell_phone attributes or add new attributes to the schema for STUDENT?
+                  </h3>
+                  <p>
+                    Answer: Since both phone numbers could have different area codes, I would store them as part of the
+                    original attributes.
+                  </p>
+                </li>
+                <li>
+                  <h3>
+                    c. Consider the Name attribute. What are the advantages and disadvantages
+                    of splitting this field from one attribute into three attributes (first name,
+                    middle name, and last name)?
+                  </h3>
+                  <p>
+                    Answer: The main advantage of splitting this field is that it allows you to access any part of the
+                    name without needing to retrieve all the name data. The main disadvantage is that each record will
+                    use slightly more memory.
+                  </p>
+                </li>
+                <li>
+                  <h3>
+                    d. What general guideline would you recommend for deciding when to store
+                    information in a single attribute and when to split the information?
+                  </h3>
+                  <p>
+                    Answer: As a general guideline I would recommend storing the information in a single attribute only
+                    if all the stored data will be used each time the attribute is accessed.
+                  </p>
+                </li>
+                <li>
+                  <h3>
+                    e. Suppose the student can have between 0 and 5 phones. Suggest two different designs that allow
+                    this type of information.
+                  </h3>
+                  <p>
+                    Answer: You could either add 5 phone attributes to the student record and allow them to be null. Or
+                    you could create a separate table just for storing phone numbers and assign each one a student Id as
+                    its foreign key.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="lcars-text-bar">
               <span></span>
             </div>
             <pre id="file-contents" onload="loadText('')"></pre>
