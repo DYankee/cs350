@@ -1,0 +1,46 @@
+gearyz@cocoM6800:~/www/cs350/hw/HW02$ sqlite3 company.db
+SQLite version 3.31.1 2020-01-27 19:55:54
+Enter ".help" for usage hints.
+sqlite> select Dname as department_name, Fname || ' ' || Lname as employee_name
+   ...> from department d join employee e on d.Dnumber = e.Dno
+   ...> order by Dnumber;
+Headquarters|James Borg
+Administration|Alicia Zelaya
+Administration|Jennifer Wallace
+Administration|Ahmad Jabbar
+Research|John Smith
+Research|Franklin Wong
+Research|Ramesh Narayan
+Research|Joyce English
+sqlite> select Dname as department_name, Fname || ' ' || Lname as employee_name, Salary
+   ...> from department d join employee e on d.Dnumber = e.Dno
+   ...> order by Salary desc;
+Headquarters|James Borg|55000
+Administration|Jennifer Wallace|43000
+Research|Franklin Wong|40000
+Research|Ramesh Narayan|38000
+Research|John Smith|30000
+Administration|Alicia Zelaya|25000
+Research|Joyce English|25000
+Administration|Ahmad Jabbar|25000
+sqlite> select Pname as product_name, Plocation, Fname || ' ' || Lname as employee_name, hours
+   ...> from project p join works_on on p.Pnumber = works_on.Pno
+   ...> join employee e on works_on.Essn = e.Ssn
+   ...> order by product_name;
+Computerization|Stafford|Franklin Wong|10
+Computerization|Stafford|Alicia Zelaya|10
+Computerization|Stafford|Ahmad Jabbar|35
+Newbenefits|Stafford|Alicia Zelaya|30
+Newbenefits|Stafford|Ahmad Jabbar|5
+Newbenefits|Stafford|Jennifer Wallace|20
+ProductX|Bellaire|John Smith|32.5
+ProductX|Bellaire|Joyce English|20
+ProductY|Sugarland|John Smith|7.5
+ProductY|Sugarland|Joyce English|20
+ProductY|Sugarland|Franklin Wong|10
+ProductZ|Houston|Ramesh Narayan|40
+ProductZ|Houston|Franklin Wong|10
+Reorganization|Houston|Franklin Wong|10
+Reorganization|Houston|Jennifer Wallace|15
+Reorganization|Houston|James Borg|
+sqlite>

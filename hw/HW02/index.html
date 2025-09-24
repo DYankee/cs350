@@ -9,16 +9,16 @@ Location: ~/gearyz/www/cs350/hw/HW02
 
 <!-- Function to load external data -->
 <script>
-  function loadText(){
-    console.log();
-    fetch('hw01.txt')
+  function loadText(fileName){
+    console.log(fileName);
+    fetch(fileName)
         .then(res => res.text())
         .then(text => {
           const insertAt = document.querySelector('#file-contents')
           insertAt.textContent = text;
         })  }
 
-  //window.onload = loadText();
+  window.onload = loadText('querries.txt');
 </script>
 
 <!DOCTYPE html>
@@ -371,7 +371,132 @@ Location: ~/gearyz/www/cs350/hw/HW02
               Files, images, and other work related to HW02.
             </p>
           </div>
+          
+          <div>
+            <div class="lcars-text-bar">
+              <span>Part 1 - Create a Database</span>
+            </div>
+            
+            <div>
+              <h2>Company Database</h2>
+              <p>SQL used to create the database</p>
+              <pre>
+                <code>
+--Delete the employee table
+-- DROP TABLE employee;
+--Create the employee table
+CREATE TABLE employee (
+    Fname VARCHAR(50),
+    Minit CHAR(1),
+    Lname VARCHAR(50),
+    Ssn VARCHAR(9) PRIMARY KEY,
+    Bdate DATE,
+    Address VARCHAR(100),
+    Sex CHAR(1),
+    Salary INT,
+    Super_ssn VARCHAR(9),
+    Dno INT
+);
+-- Insert the data
+INSERT INTO employee (Fname, Minit, Lname, Ssn, Bdate, Address, Sex, Salary, Super_ssn, Dno) VALUES
+('John', 'B', 'Smith', '123456789', '1965-01-09', '731 Fondren, Houston, TX', 'M', 30000, '333445555', 5),
+('Franklin', 'T', 'Wong', '333445555', '1955-12-08', '638 Voss, Houston, TX', 'M', 40000, '888665555', 5),
+('Alicia', 'J', 'Zelaya', '999887777', '1968-01-19', '3321 Castle, Spring, TX', 'F', 25000, '987654321', 4),
+('Jennifer', 'S', 'Wallace', '987654321', '1941-06-20', '291 Berry, Bellaire, TX', 'F', 43000, '888665555', 4),
+('Ramesh', 'K', 'Narayan', '666884444', '1962-09-15', '975 Fire Oak, Humble, TX', 'M', 38000, '333445555', 5),
+('Joyce', 'A', 'English', '453453453', '1972-07-31', '5631 Rice, Houston, TX', 'F', 25000, '333445555', 5),
+('Ahmad', 'V', 'Jabbar', '987987987', '1969-03-29', '980 Dallas, Houston, TX', 'M', 25000, '987654321', 4),
+('James', 'E', 'Borg', '888665555', '1937-11-10', '450 Stone, Houston, TX', 'M', 55000, NULL, 1);
 
+
+-- Delete department table
+-- DROP TABLE department;
+-- Create department table
+CREATE TABLE department (
+    Dname VARCHAR(50) NOT NULL,
+    Dnumber INT PRIMARY KEY,
+    Mgr_ssn VARCHAR(9),
+    Mgr_start_date DATE
+);
+-- Insert DEPARTMENT data
+INSERT INTO department (Dname, Dnumber, Mgr_ssn, Mgr_start_date) VALUES
+('Research', 5, '333445555', '1988-05-22'),
+('Administration', 4, '987654321', '1995-01-01'),
+('Headquarters', 1, '888665555', '1981-06-19');
+
+-- Delete dept_location
+-- DROP TABLE dept_locations;
+-- Create dept_locations table
+CREATE TABLE dept_locations (
+    Dnumber INT,
+    Dlocation VARCHAR(50)
+);
+-- Insert dept_locations data
+INSERT INTO dept_locations (Dnumber, Dlocation) VALUES
+(1, 'Houston'),
+(4, 'Stafford'),
+(5, 'Bellaire'),
+(5, 'Sugarland'),
+(5, 'Houston');
+
+--Delete project table
+-- DROP TABLE project;
+-- Create PROJECT table
+CREATE TABLE project (
+    Pname VARCHAR(50) NOT NULL,
+    Pnumber INT PRIMARY KEY,
+    Plocation VARCHAR(50),
+    Dnum INT
+);
+-- Insert PROJECT data
+INSERT INTO project (Pname, Pnumber, Plocation, Dnum) VALUES
+('ProductX', 1, 'Bellaire', 5),
+('ProductY', 2, 'Sugarland', 5),
+('ProductZ', 3, 'Houston', 5),
+('Computerization', 10, 'Stafford', 4),
+('Reorganization', 20, 'Houston', 1),
+('Newbenefits', 30, 'Stafford', 4);
+
+-- Delete table works_on
+-- DROP TABLE works_on;
+-- Create WORKS_ON table
+CREATE TABLE works_on (
+    Essn VARCHAR(9),
+    Pno INT,
+    Hours DECIMAL(4,1),
+    PRIMARY KEY (Essn, Pno),
+    FOREIGN KEY (Essn) REFERENCES EMPLOYEE(Ssn),
+    FOREIGN KEY (Pno) REFERENCES PROJECT(Pnumber)
+);
+-- Insert WORKS_ON data
+INSERT INTO works_on (Essn, Pno, Hours) VALUES
+('123456789', 1, 32.5),
+('123456789', 2, 7.5),
+('666884444', 3, 40.0),
+('453453453', 1, 20.0),
+('453453453', 2, 20.0),
+('333445555', 2, 10.0),
+('333445555', 3, 10.0),
+('333445555', 10, 10.0),
+('333445555', 20, 10.0),
+('999887777', 30, 30.0),
+('999887777', 10, 10.0),
+('987987987', 10, 35.0),
+                </code>
+              </pre>
+              
+              
+              <div>
+                <h2>Test querries run on the company database</h2>
+                <pre>
+                  <code id="file-contents"></code>
+                </pre>
+              </div>
+              
+            </div>
+            
+          </div>
+          
           <div>
             <div class="lcars-text-bar">
               <span>Part 2 - Relational Model</span>
@@ -385,7 +510,7 @@ Location: ~/gearyz/www/cs350/hw/HW02
                 the cell phone may be from a different city and state (or province) from the
                 local phone. A possible tuple of the relation is shown below:
               </p>
-                <table>
+                <table style="border-spacing: 25px">
                   <tr>
                     <th>Name</th>
                     <th>Ssn</th>
@@ -403,8 +528,8 @@ Location: ~/gearyz/www/cs350/hw/HW02
                       123 Main St.,
                       Anytown, CA 94539
                     </td>
-                    <td>19</td>
                     <td>555-4321</td>
+                    <td>19</td>
                     <td>3.75</td>
                   </tr>
                 </table>
@@ -464,14 +589,6 @@ Location: ~/gearyz/www/cs350/hw/HW02
               </ul>
             </div>
           </div>
-
-          <div>
-            <div class="lcars-text-bar">
-              <span></span>
-            </div>
-            <pre id="file-contents" onload="loadText('')"></pre>
-          </div>
-
             <!-- End content area. -->
         </main>
         <footer>
