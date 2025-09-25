@@ -13,14 +13,21 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="company.db" uuid="2210a665-a9dc-450b-b6cb-4ffd9b5ea758">
+    <data-source source="LOCAL" name="company.db" uuid="11805d00-72b1-443e-b2c6-5239f4656455">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/databases/company.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/hw/HW02/company.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="university.db" uuid="8d5d4650-da0e-4223-9e20-0b8b705dbabc">
+    <data-source source="LOCAL" name="company.db [2]" uuid="3ace5a4b-5116-4a2b-a116-c59c57808c64">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/hw/HW03/company.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="university.db" uuid="4662b15c-d2a9-4971-bc1e-1c07c624e994">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

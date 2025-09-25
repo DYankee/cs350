@@ -1,181 +1,44 @@
-z-geary@Dutchman:~/code/school/cs350/databases >sqlite3 company.db
-SQLite version 3.50.4 2025-07-30 19:33:53
+gearyz@cocoM6800:~/www/cs350/hw/HW03$ sqlite3 company.db
+SQLite version 3.31.1 2020-01-27 19:55:54
 Enter ".help" for usage hints.
-sqlite> .tables
-department      dept_locations  project
-dependent       employee        works_on
-sqlite> select * from department;
-Research|5|333445555|1978-05-22
-Administration|4|987654321|1985-01-01
-Headquarters|1|888665555|1971-06-19
-Software|6|111111100|1999-05-15
-Hardware|7|444444400|1998-05-15
-Sales|8|555555500|1997-01-01
-sqlite> select * from employee;
-Andy|C|Vile|222222202|1944-06-21|1967 Jordan, Milwaukee, WI|M|53000|222222200|7
-Brad|C|Knight|111111103|1968-02-13|176 Main St., Atlanta, GA|M|44000|111111100|6
-Evan|E|Wallis|222222200|1958-01-16|134 Pelham, Milwaukee, WI|M|92000|null|7
-Josh|U|Zell|222222201|1954-05-22|266 McGrady, Milwaukee, WI|M|56000|222222200|7
-Jared|D|James|111111100|1966-10-10|123 Peachtree, Atlanta, GA|M|85000|null|6
-Justin|n|Mark|111111102|1966-01-12|2342 May, Atlanta, GA|M|40000|111111100|6
-Jon|C|Jones|111111101|1967-11-14|111 Allgood, Atlanta, GA|M|45000|111111100|6
-John|C|James|555555500|1975-06-30|7676 Bloomington, Sacramento, CA|M|81000|null|6
-Alex|D|Freed|444444400|1950-10-09|4333 Pillsbury, Milwaukee, WI|M|89000|null|7
-Ahmad|V|Jabbar|987987987|1959-03-29|980 Dallas, Houston, TX|M|25000|987654321|4
-Joyce|A|English|453453453|1962-07-31|5631 Rice, Houston, TX|F|25000|333445555|5
-Ramesh|K|Narayan|666884444|1952-09-15|971 Fire Oak, Humble, TX|M|38000|333445555|5
-Alicia|J|Zelaya|999887777|1958-07-19|3321 Castle, Spring, TX|F|25000|987654321|4
-John|B|Smith|123456789|1955-01-09|731 Fondren, Houston, TX|M|30000|333445555|5
-Jennifer|S|Wallace|987654321|1931-06-20|291 Berry, Bellaire, TX|F|43000|888665555|4
-Franklin|T|Wong|333445555|1945-12-08|638 Voss, Houston, TX|M|40000|888665555|5
-James|E|Borg|888665555|1927-11-10|450 Stone, Houston, TX|M|55000|null|1
-Tom|G|Brand|222222203|1966-12-16|112 Third St, Milwaukee, WI|M|62500|222222200|7
-Jenny|F|Vos|222222204|1967-11-11|263 Mayberry, Milwaukee, WI|F|61000|222222201|7
-Chris|A|Carter|222222205|1960-03-21|565 Jordan, Milwaukee, WI|F|43000|222222201|7
-Kim|C|Grace|333333300|1970-10-23|6677 Mills Ave, Sacramento, CA|F|79000|null|6
-Jeff|H|Chase|333333301|1970-01-07|145 Bradbury, Sacramento, CA|M|44000|333333300|6
-Bonnie|S|Bays|444444401|1956-06-19|111 Hollow, Milwaukee, WI|F|70000|444444400|7
-Alec|C|Best|444444402|1966-06-18|233 Solid, Milwaukee, WI|M|60000|444444400|7
-Sam|S|Snedden|444444403|1977-07-31|987 Windy St, Milwaukee, WI|M|48000|444444400|7
-Nandita|K|Ball|555555501|1969-04-16|222 Howard, Sacramento, CA|M|62000|555555500|6
-Bob|B|Bender|666666600|1968-04-17|8794 Garfield, Chicago, IL|M|96000|null|8
-Jill|J|Jarvis|666666601|1966-01-14|6234 Lincoln, Chicago, IL|F|36000|666666600|8
-Kate|W|King|666666602|1966-04-16|1976 Boone Trace, Chicago, IL|F|44000|666666600|8
-Lyle|G|Leslie|666666603|1963-06-09|417 Hancock Ave, Chicago, IL|M|41000|666666601|8
-Billie|J|King|666666604|1960-01-01|556 Washington, Chicago, IL|F|38000|666666603|8
-Jon|A|Kramer|666666605|1964-08-22|1988 Windy Creek, Seattle, WA|M|41500|666666603|8
-Ray|H|King|666666606|1949-08-16|213 Delk Road, Seattle, WA|M|44500|666666604|8
-Gerald|D|Small|666666607|1962-05-15|122 Ball Street, Dallas, TX|M|29000|666666602|8
-Arnold|A|Head|666666608|1967-05-19|233 Spring St, Dallas, TX|M|33000|666666602|8
-Helga|C|Pataki|666666609|1969-03-11|101 Holyoke St, Dallas, TX|F|32000|666666602|8
-Naveen|B|Drew|666666610|1970-05-23|198 Elm St, Philadelphia, PA|M|34000|666666607|8
-Carl|E|Reedy|666666611|1977-06-21|213 Ball St, Philadelphia, PA|M|32000|666666610|8
-Sammy|G|Hall|666666612|1970-01-11|433 Main Street, Miami, FL|M|37000|666666611|8
-Red|A|Bacher|666666613|1980-05-21|196 Elm Street, Miami, FL|M|33500|666666612|8
-sqlite> .schema employees;
-sqlite> .schema employee;
-sqlite> .describe employee
-Error: unknown command or invalid arguments:  "describe". Enter ".help" for help
-sqlite> PRAGMA TABle_info(employee)
-   ...> ;
-0|fname|varchar(15)|1||0
-1|minit|varchar(1)|0|NULL|0
-2|lname|varchar(15)|1||0
-3|ssn|char(9)|1|''|1
-4|bdate|date|0|NULL|0
-5|address|varchar(50)|0|NULL|0
-6|sex|char(1)|0|NULL|0
-7|salary|decimal(10,2)|0|NULL|0
-8|superssn|char(9)|0|NULL|0
-9|dno|int(4)|0|NULL|0
-sqlite> select * from employee where fname = "Ray";
-Parse error: no such column: "Ray" - should this be a string literal in single-quotes?
-  select * from employee where fname = "Ray";
-                         error here ---^
-sqlite> select * from employee where fname = 'Ray';
-Ray|H|King|666666606|1949-08-16|213 Delk Road, Seattle, WA|M|44500|666666604|8
+sqlite> select Fname || ' ' || Lname as employee_name, Dnum, Pname as project_name, Dno
+   ...> from project p join employee e on p.Dnum = e.Dno;
+Franklin Wong|5|ProductX|5
+John Smith|5|ProductX|5
+Joyce English|5|ProductX|5
+Ramesh Narayan|5|ProductX|5
+Franklin Wong|5|ProductY|5
+John Smith|5|ProductY|5
+Joyce English|5|ProductY|5
+Ramesh Narayan|5|ProductY|5
+Franklin Wong|5|ProductZ|5
+John Smith|5|ProductZ|5
+Joyce English|5|ProductZ|5
+Ramesh Narayan|5|ProductZ|5
+Ahmad Jabbar|4|Computerization|4
+Alicia Zelaya|4|Computerization|4
+Jennifer Wallace|4|Computerization|4
+James Borg|1|Reorganization|1
+Ahmad Jabbar|4|Newbenefits|4
+Alicia Zelaya|4|Newbenefits|4
+Jennifer Wallace|4|Newbenefits|4
 sqlite> update employee
-   ...> set dno = NULL
-   ...> where fname = 'Ray';
-sqlite> select * from employee where fname = 'Ray';
-Ray|H|King|666666606|1949-08-16|213 Delk Road, Seattle, WA|M|44500|666666604|
-sqlite> select * from project;
-ProductX|1|Bellaire|5
-ProductY|2|Sugarland|5
-ProductZ|3|Houston|5
-Computerization|10|Stafford|4
-Reorganization|20|Houston|1
-Newbenefits|30|Stafford|4
-OperatingSystems|61|Jacksonville|6
-DatabaseSystems|62|Birmingham|6
-Middleware|63|Jackson|6
-InkjetPrinters|91|Phoenix|7
-LaserPrinters|92|LasVegas|7
-sqlite> PRAGMA TABle_info(project)
-   ...> ;
-0|pname|varchar(25)|1||0
-1|pnumber|int(4)|1|'0'|1
-2|plocation|varchar(15)|0|NULL|0
-3|dnum|int(4)|1||0
-sqlite> select * from project;
-ProductX|1|Bellaire|5
-ProductY|2|Sugarland|5
-ProductZ|3|Houston|5
-Computerization|10|Stafford|4
-Reorganization|20|Houston|1
-Newbenefits|30|Stafford|4
-OperatingSystems|61|Jacksonville|6
-DatabaseSystems|62|Birmingham|6
-Middleware|63|Jackson|6
-InkjetPrinters|91|Phoenix|7
-LaserPrinters|92|LasVegas|7
-sqlite> select * from project where plocation = 'Houston';
-ProductZ|3|Houston|5
-Reorganization|20|Houston|1
-sqlite> select * from project where plocation = 'Bellaire';
-ProductX|1|Bellaire|5
+   ...> SET Dno = NULL
+   ...> WHERE Fname = 'James';
 sqlite> update project
-   ...> set dnum = NULL
-   ...> where plocation = 'Bellaire';
-sqlite> select fname, salary, pname from
-   ...> employee e join project p
-   ...> on e.dno = p.dnum;
-Andy|53000|InkjetPrinters
-Andy|53000|LaserPrinters
-Brad|44000|DatabaseSystems
-Brad|44000|Middleware
-Brad|44000|OperatingSystems
-Evan|92000|InkjetPrinters
-Evan|92000|LaserPrinters
-Josh|56000|InkjetPrinters
-Josh|56000|LaserPrinters
-Jared|85000|DatabaseSystems
-Jared|85000|Middleware
-Jared|85000|OperatingSystems
-Justin|40000|DatabaseSystems
-Justin|40000|Middleware
-Justin|40000|OperatingSystems
-Jon|45000|DatabaseSystems
-Jon|45000|Middleware
-Jon|45000|OperatingSystems
-John|81000|DatabaseSystems
-John|81000|Middleware
-John|81000|OperatingSystems
-Alex|89000|InkjetPrinters
-Alex|89000|LaserPrinters
-Ahmad|25000|Computerization
-Ahmad|25000|Newbenefits
-Joyce|25000|ProductY
-Joyce|25000|ProductZ
-Ramesh|38000|ProductY
-Ramesh|38000|ProductZ
-Alicia|25000|Computerization
-Alicia|25000|Newbenefits
-John|30000|ProductY
-John|30000|ProductZ
-Jennifer|43000|Computerization
-Jennifer|43000|Newbenefits
-Franklin|40000|ProductY
-Franklin|40000|ProductZ
-James|55000|Reorganization
-Tom|62500|InkjetPrinters
-Tom|62500|LaserPrinters
-Jenny|61000|InkjetPrinters
-Jenny|61000|LaserPrinters
-Chris|43000|InkjetPrinters
-Chris|43000|LaserPrinters
-Kim|79000|DatabaseSystems
-Kim|79000|Middleware
-Kim|79000|OperatingSystems
-Jeff|44000|DatabaseSystems
-Jeff|44000|Middleware
-Jeff|44000|OperatingSystems
-Bonnie|70000|InkjetPrinters
-Bonnie|70000|LaserPrinters
-Alec|60000|InkjetPrinters
-Alec|60000|LaserPrinters
-Sam|48000|InkjetPrinters
-Sam|48000|LaserPrinters
-Nandita|62000|DatabaseSystems
-Nandita|62000|Middleware
-Nandita|62000|OperatingSystems
+   ...> SET Dnum = NULL
+   ...> WHERE Dnum = 4;
+sqlite> select Fname || ' ' || Lname as employee_name, Dnum, Pname as project_name, Dno
+   ...> from project p join employee e on p.Dnum = e.Dno;
+Franklin Wong|5|ProductX|5
+John Smith|5|ProductX|5
+Joyce English|5|ProductX|5
+Ramesh Narayan|5|ProductX|5
+Franklin Wong|5|ProductY|5
+John Smith|5|ProductY|5
+Joyce English|5|ProductY|5
+Ramesh Narayan|5|ProductY|5
+Franklin Wong|5|ProductZ|5
+John Smith|5|ProductZ|5
+Joyce English|5|ProductZ|5
+Ramesh Narayan|5|ProductZ|5
