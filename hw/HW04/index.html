@@ -374,9 +374,78 @@ Location: ~/gearyz/www/cs350/hw/HW04-1
 
           <div>
             <div class="lcars-text-bar">
-              <span></span>
+              <span>HW4_Complex_SQL_Queries</span>
             </div>
-            <pre id="file-contents" onload="loadText('')"></pre>
+            <div>
+              <h3>5.6. Specify the following queries in SQL on the database schema in Figure 1.2.</h3>
+              <p>
+                a. Retrieve the names and major departments of all straight-A students (students who have a grade of A in all their courses).
+              </p>
+              <pre>
+                <code>
+SELECT s.name, s.major
+FROM student s
+JOIN grade_report gr
+ON s.student_number = gr.student_number
+WHERE NOT EXISTS (
+    SELECT grade
+    FROM grade_report gr
+    WHERE gr.student_number = s.student_number
+    AND gr.grade != 'A'
+)
+GROUP BY s.name, s.major;
+                </code>
+              </pre>
+              <p>
+                b. Retrieve the names and major departments of all students who do not have a grade of A in any of their courses.
+              </p>
+              <pre>
+                <code>
+SELECT s.name, s.major
+FROM student s
+JOIN grade_report gr
+ON s.student_number = gr.student_number
+WHERE NOT EXISTS (
+    SELECT grade
+    FROM grade_report gr
+    WHERE gr.student_number = s.student_number
+    AND gr.grade = 'A'
+)
+GROUP BY s.name, s.major;
+                </code>
+              </pre>
+            </div>
+            <div>
+              <h3>5.7.In SQL, specify the following queries on the database in Figure 3.5 using the concept of nested queries and concepts described in this chapter.</h3>
+              <p>
+                a. Retrieve the names of all employees who work in the department that has the employee with the highest salary among all employees.
+              </p>
+              <pre>
+                <code>
+SELECT fname || lname FROM employee
+WHERE dno = (
+  SELECT dno FROM employee
+  WHERE salary = (SELECT max(salary) FROM employee)
+);
+                </code>
+              </pre>
+              <p>
+                b. Retrieve the names of all employees whose supervisor's supervisor has '888665555' for Ssn.
+              </p>
+              <pre>
+                <code>
+
+                </code>
+              </pre>
+              <p>
+               c. Retrieve the names of employees who make at least $10,000 more than the employee who is paid the least in the company.
+              </p>
+              <pre>
+                <code>
+
+                </code>
+              </pre>
+            </div>
           </div>
 
             <!-- End content area. -->
