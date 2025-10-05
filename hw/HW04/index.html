@@ -434,7 +434,12 @@ WHERE dno = (
               </p>
               <pre>
                 <code>
-
+SELECT fname || ' ' || lname
+FROM employee WHERE superssn IN (
+    SELECT ssn
+    FROM employee
+    WHERE superssn = 888665555
+);
                 </code>
               </pre>
               <p>
@@ -442,7 +447,14 @@ WHERE dno = (
               </p>
               <pre>
                 <code>
-
+SELECT fname || ' ' || lname, salary
+FROM employee
+WHERE salary >= (
+    SELECT salary
+    FROM employee
+    ORDER BY salary
+    LIMIT 1) + 10000
+ORDER BY salary;
                 </code>
               </pre>
             </div>
