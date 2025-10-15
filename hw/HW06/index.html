@@ -373,10 +373,327 @@ Location: ~/gearyz/www/cs350/hw/HW06
           </div>
 
           <div>
-            <div class="lcars-text-bar">
-              <span></span>
+            <div class="lcars-text-bar"><span>7.19</span></div>
+            <h2 class="font-violet-creme">
+              Consider the ER diagram in Figure 7.20, which shows a simplified schema for an airline reservations system. Extract from the ER diagram the
+              requirements and constraints that produced this schema. Try to be as precise as possible in your requirements and constraints specification.
+            </h2>
+            <hr>
+            
+            <h2 class="font-golden-orange">Entities and their attributes/constraints</h2>
+            <h3>Strong entities</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr)">
+              <div>
+                <h3>Airport</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Airport_code</li>
+                  <li>City</li>
+                  <li>State</li>
+                  <li>Name</li>
+                </ul>
+                <h5>Constraints</h5>
+                <ul class="code">
+                  <li>Primary Key: Airport_code</li>
+                </ul>
+              </div>
+              <div>
+                <h3>AIRPLANE_TYPE</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Compoany</li>
+                  <li>Type_name</li>
+                  <li>Max_seats</li>
+                </ul>
+                <h5>Constraints</h5>
+                <ul class="code">
+                  <li>Primary Key: Type_name</li>
+                </ul>
+              </div>
+              <div>
+                <h3>AIRPLANE</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Airplane_id</li>
+                  <li>Total_no_of_seats</li>
+                </ul>
+                <h5>Constraints</h5>
+                <ul class="code">
+                  <li>Primary Key: Airplane_id</li>
+                </ul>
+              </div>
+              <div>
+                <h3>FLIGHT</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Number</li>
+                  <li>Airline</li>
+                  <li>Weekdays</li>
+                </ul>
+                <h5>Constraints</h5>
+                <ul class="code">
+                  <li>Primary Key: Number</li>
+                </ul>
+              </div>
             </div>
-            <pre id="file-contents" onload="loadText('')"></pre>
+            <h3>Weak entities</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr)">
+              <div>
+                <h3>FARE</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Restrictions</li>
+                  <li>Amount</li>
+                  <li>Code</li>
+                </ul>
+                <h5>Constraints</h5>
+                <ul class="code">
+                  <li>Weak Key: Code</li>
+                </ul>
+              </div>
+              <div>
+                <h3>FLIGHT_LEG</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Leg_no</li>
+                </ul>
+                <h5>Constraints</h5>
+                <ul class="code">
+                  <li>Weak Key: </li>
+                </ul>
+              </div>
+              <div>
+                <h3>LEG_INSTANCE</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>No_of_available_seats</li>
+                  <li>Date</li>
+                </ul>
+                <h5>Constraints</h5>
+                <ul class="code">
+                  <li>Weak Key: Date</li>
+                </ul>
+              </div>
+              <div>
+                <h3>SEAT</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Seat_no</li>
+                </ul>
+                <h5>Constraints</h5>
+                <ul class="code">
+                  <li>Weak Key: Seat_no</li>
+                </ul>
+              </div>
+              
+            </div>
+            
+            <h2 class="font-golden-orange">Entity relationships and their attributes</h2>
+            <h3>Relationships</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr)">
+              <div>
+                <h3>DEPARTURE_AIRPORT</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Scheduled_dep_time</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>FLIGHT_LEG</li>
+                  <li>AIRPORT</li>
+                </ul>
+                <h5>Relationship</h5>
+                <ul class="code">
+                  <li>Type: One to many</li>
+                  <li>For every AIRPORT there can be many FLIGHT_LEGs</li>
+                </ul>
+                
+              </div>
+              <div>
+                <h3>ARRIVAL_AIRPORT</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Scheduled_arr_time</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>FLIGHT_LEG</li>
+                  <li>AIRPORT</li>
+                </ul>
+                <h5>Relationship</h5>
+                <ul class="code">
+                  <li>Type: One to many</li>
+                  <li>For every Airport there can be many FLIGHT_Legs</li>
+                </ul>
+              </div>
+              <div>
+                <h3>CAN_LAND</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>None</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>AIRPORT</li>
+                  <li>AIRPLANE_TYPE</li>
+                </ul>
+                <h5>Relationship</h5>
+                <ul class="code">
+                  <li>Type: Many to Many</li>
+                  <li>
+                    AIRPORTS have many AIRPLANE_TYPEs that can land there and
+                    AIRPLANE_TYPEs can land at many AIRPORTs
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3>TYPE</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>None</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>AIRPLANE_TYPE</li>
+                  <li>AIRPLANE</li>
+                </ul>
+                <h5>Relationships</h5>
+                <ul class="code">
+                  <li>Type: One to Many</li>
+                  <li>For every AIRPLANE_TYPE there can be many AIRPLANEs</li>
+                </ul>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr)">
+              <div>
+                <h3>ASSIGNED</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>None</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>AIRPLANE</li>
+                  <li>LEG_INSTANCE</li>
+                </ul>
+                <h5>Relationship</h5>
+                <ul class="code">
+                  <li>Type: One to many</li>
+                  <li>every AIRPLANE can be assigned to many LEG_INSTANCE's</li>
+                </ul>
+              </div>
+              <div>
+                <h3>DEPARTS</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Dep_time</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>AIRPORT</li>
+                  <li>LEG_INSTANCE</li>
+                </ul>
+                <h5>Relationship</h5>
+                <ul class="code">
+                  <li>Type: One to many</li>
+                  <li>For every Airport there can be many LEG_INSTANCE's</li>
+                </ul>
+              </div>
+              <div>
+                <h3>ARRIVES</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Arr_time</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>AIRPORT</li>
+                  <li>LEG_INSTANCE</li>
+                </ul>
+                <h5>Relationship</h5>
+                <ul class="code">
+                  <li>Type: One to Many</li>
+                  <li>
+                    For every AIRPORT there can be many LEG_INSTANCE's
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h3>Identifying Relationships</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr)">
+              <div>
+                <h3>RESERVATION</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>Customer_name</li>
+                  <li>Cphone</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>SEAT</li>
+                  <li>LEG_INSTANCE</li>
+                </ul>
+                <h5>Relationship</h5>
+                <ul class="code">
+                  <li>Type: One to many</li>
+                  <li>For every LEG_INSTANCE there exists multiple RESERVATIONS which in turn can have multiple SEAT's</li>
+                </ul>
+              </div>
+              <div>
+                <h3>INSTANCE_OF</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>None</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>FLIGHT_LEG</li>
+                  <li>LEG_INSTANCE</li>
+                </ul>
+                <h5>Relationship</h5>
+                <ul class="code">
+                  <li>Type: One to many</li>
+                  <li>For every FLIGHT_LEG there can be many LEG_INSTANCE's</li>
+                </ul>
+              </div>
+              <div>
+                <h3>LEGS</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>None</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>FLIGHT_LEG</li>
+                  <li>FLIGHT</li>
+                </ul>
+                <h5>Relationship</h5>
+                <ul class="code">
+                  <li>Type: One to Many</li>
+                  <li>
+                    For every FLIGHT there can be many FLIGHT_LEG's
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3>FARES</h3>
+                <h5>Attributes</h5>
+                <ul class="code">
+                  <li>None</li>
+                </ul>
+                <h5>Relates entities</h5>
+                <ul class="code">
+                  <li>FLIGHT</li>
+                  <li>FARE</li>
+                </ul>
+                <h5>Relationships</h5>
+                <ul class="code">
+                  <li>Type: One to Many</li>
+                  <li>For every FLIGHT there can be many FARE's</li>
+                </ul>
+              </div>
+            </div>
+            
           </div>
 
             <!-- End content area. -->
