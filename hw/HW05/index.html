@@ -364,21 +364,110 @@ Location: ~/gearyz/www/cs350/hw/HW05
         </div>
         <main>
           <!-- Start your content here. -->
-
           <div>
             <h1>HW5_Algebra_and_Calculus</h1>
             <p>
               Files, images, and other work related to HW05.
             </p>
           </div>
-
           <div>
             <div class="lcars-text-bar">
-              <span></span>
+              <span>HW5_Algebra_and_Calculus</span>
             </div>
-            <pre id="file-contents" onload="loadText('')"></pre>
+            <div>
+              <h3 class="text-2xl">6.23. Specify the following queries in relational algebra on the database schema in Exercise 3.17: </h3>
+              
+              <div>
+                <h5>a. For the sales person named 'Jane Doe', list the following information for all the cars she sold: Serial#, Manufacturer, Sale_price.</h5>
+                <p class="code">
+                  &pi;<sub>Serial_no, Manufacturer, Sale_price</sub>( ( (&sigma;<sub>Name='Jane Doe'</sub> (SALESPERSON)) &bowtie; SALE ) &bowtie; CAR )
+                </p>
+              </div>
+              
+              <div>
+                <h5>b. List the Serial# and Model of cars that have no options.</h5>
+                <p class="code">
+                  &pi;<sub>Serial_no, Model</sub> (( &pi;<sub>Serial_no</sub> (CAR) &minus; &pi;<sub>Serial_no</sub> (OPTION) ) &bowtie; CAR)
+                </p>
+              </div>
+              
+              <div>
+                <h5>
+                  c. Consider the NATURAL JOIN operation between SALESPERSON and
+                  SALE. What is the meaning of a left outer join for these tables (do not
+                  change the order of relations)? Explain with an example.
+                </h5>
+                <p class="code">
+                  A natural join between SALESPERSON and SALE combines tuples where the common attribute, Salesperson_id, has matching values.
+                  The result will include details for every sale made by a salesperson only if a matching Salesperson_id is found in each tuple.
+                  <br>
+                  A Left Outer Join on the other hand will include all tuples from the SALESPERSON table regardless of weather or not there is a matching tuple in the SALE table.
+                </p>
+              </div>
+              
+              <div>
+                <h5>d. Write a query in relational algebra involving selection and one set operation and say in words what the query does.</h5>
+                <p class="code">
+                  (&sigma;<sub>Price < 30000</sub> (CAR)) &cup; (&sigma;<sub>Manufacturer = 'Toyota'</sub> (CAR))
+                </p>
+              </div>
+            </div>
+            
+            <div>
+              <div>
+                <h3 class="text-2xl">6.26. Specify queries c, d, and f of Exercise 6.18 in both tuple and domain relational calculus.</h3>
+                <h5>
+                  6.18: Consider the LIBRARY relational database schema shown in Figure 6.14,
+                  which is used to keep track of books, borrowers, and book loans. Referential
+                  integrity constraints are shown as directed arcs in Figure 6.14, as in the notation
+                  of Figure 3.7. Write down relational expressions for the following
+                  queries:
+                </h5>
+              </div>
+              
+              <div>
+                <h5>
+                  c. Retrieve the names of all borrowers who do not have any books checked
+                  out.
+                </h5>
+                <p class="code">
+                  &pi; <sub>Name</sub> (BORROWER) - &pi; <sub>Name</sub> (BORROWER &bowtie; BOOK_LOANS)
+                </p>
+              </div>
+              
+              <div>
+                <h5>
+                  d. For each book that is loaned out from the Sharpstown branch and whose
+                  Due_date is today, retrieve the book title, the borrower's name, and the
+                  borrower's address.
+                </h5>
+                <p class="code">
+                  &pi; <sub>Title, Name, Address</sub> (
+                    &sigma; Branch_name = 'Sharpstown' ^ Due_date = TODAY (
+                      BOOK_LOANS &bowtie; LIBRARY_BRANCH &bowtie; BOOK &bowtie; BORROWER
+                    )
+                  )
+                </p>
+              </div>
+              
+              <div>
+                <h5>
+                  f. Retrieve the names, addresses, and number of books checked out for all
+                  borrowers who have more than five books checked out.
+                </h5>
+                <p class="code">
+                  &pi; <sub>Name, Address, COUNT_Books</sub> (
+                    &sigma; COUNT_Books > 5 (
+                      BORROWER &bowtie; (
+                        Card_no &#8465; COUNT(Book_id) AS COUNT_Books (BOOK_LOANS)
+                      )
+                    )
+                  )
+                </p>
+              </div>
+              
+            </div>
           </div>
-
             <!-- End content area. -->
         </main>
         <footer>
