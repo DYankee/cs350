@@ -8,7 +8,7 @@ Location: ~/gearyz/www/cs350/hw/HW08
 -->
 
 <!-- Function to load external data -->
-<script>
+<script xmlns:h4="http://www.w3.org/1999/html" xmlns:h4="http://www.w3.org/1999/html">
   function loadText(){
     console.log();
     fetch('hw01.txt')
@@ -374,12 +374,446 @@ Location: ~/gearyz/www/cs350/hw/HW08
 
           <div>
             <div class="lcars-text-bar">
-              <span></span>
+              <span>17.41</span>
             </div>
-            <pre id="file-contents" onload="loadText('')"></pre>
+            <div>
+              <h2>
+                Write program code to access individual fields of records under each of the
+                following circumstances. For each case, state the assumptions you make concerning pointers,
+                separator characters, and so on. Determine the type of information needed in the file header
+                in order for your code to be general in each case.
+              </h2>
+              <hr>
+              <div>
+                <h3>a. Fixed-length records with unspanned blocking</h3>
+                <h4>Header Info</h4>
+                <p>temp</p>
+                <h4>Program Code</h4>
+                <code>
+                  temp
+                </code>
+              </div>
+              <div>
+                <h3>b. Fixed-length records with spanned blocking</h3>
+                <h4>Header Info</h4>
+                <p>temp</p>
+                <h4>Program Code</h4>
+                <code>
+                  temp
+                </code>
+              </div>
+              <div>
+                <h3>c. Variable-length records with variable-length fields and spanned blocking</h3>
+                <h4>Header Info</h4>
+                <p>temp</p>
+                <h4>Program Code</h4>
+                <code>
+                  temp
+                </code>
+              </div>
+            
+            </div>
           </div>
-
-            <!-- End content area. -->
+          
+          <div>
+            <div class="lcars-text-bar">
+              <span>18.19</span>
+            </div>
+            <div>
+              <h2 class="font-violet-creme">
+                A PARTS file with Part# as the key field includes records with the following
+                Part# values: <br> 23, 65, 37, 60, 46, 92, 48, 71, 56, 59, 18, 21, 10, 74, 78, 15, 16, 20,
+                24, 28, 39, 43, 47, 50, 69, 75, 8, 49, 33, 38. <br> Suppose that the search field values
+                are inserted in the given order in a B+-tree of order p = 4 and pleaf = 3; show
+                how the tree will expand and what the final tree will look like.
+              </h2>
+              <hr>
+              <p>
+                Because its hard to illustrate the links between nodes assume the following pointers exist in each node: <br>
+                <ul>
+                  <li>All leaf nodes have at most 3 page numbers and a pointer to the node to their right (node with next highest page number)</li>
+                  <li>All internal nodes have at least 2 pointers and at most 4</li>
+                  <li>
+                    Internal node pointers behave in the following ways:
+                    <ul style="padding-left: 1rem">
+                      <li>Left pointer: all page numbers < the first value in the node</li>
+                      <li>Middle or middle Left pointer: all page numbers >= the first value and less then the second value in the node</li>
+                      <li>Middle right pointer: all page numbers >= the second value and less then the third value in the node</li>
+                      <li>right pointer: all page numbers >= the third value in the node</li>
+                    </ul>
+                  </li>
+                </ul>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5rem; font-size: large">
+                <div style="text-align: center">
+                  <h3>Value 1: 23</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [23] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 2: 65</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [23,65] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 3: 37</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [23,37,65] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 4: 60</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [23,37,60,65] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right node</h4>
+                  <code>
+                    [60] <br>
+                    [23,37] [60,65] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 5: 46</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [60] <br>
+                    [23,37,46] [60,65] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 6: 92</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [60] <br>
+                    [23,37,46] [60,65,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 7: 48</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [60] <br>
+                    [23,37,46,48] [60,65,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [46,60] <br>
+                    [23,37] [46,48] [60,65,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 8: 71</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [23,37] [46,48] [60,65,71,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [46,60,71] <br>
+                    [23,37] [46,48] [60,65] [71,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h4>Value 9: 56</h4>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60,71] <br>
+                    [23,37] [46,48,56] [60,65] [71,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 10: 59</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60,71] <br>
+                    [23,37] [46,48,56,59] [60,65] [71,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [46,56,60,71] <br>
+                    [23,37] [46,48] [56,59] [60,65] [71,92] <br>
+                  </code>
+                  <h4>Split internal node with more than 4 pointers and promote smallest key in right node of the split</h4>
+                  <code>
+                    [60] <br>
+                    [46,56] [60,71] <br>
+                    [23,37] [46,48] [56,59] [60,65] [71,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 11: 18</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [60] <br>
+                    [46,56] [60,71] <br>
+                    [18,23,37] [46,48] [56,59] [60,65] [71,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 12: 21</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [60] <br>
+                    [46,56] [60,71] <br>
+                    [18,21,23,37] [46,48] [56,59] [60,65] [71,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [60] <br>
+                    [23,46,56] [60,71] <br>
+                    [18,21] [23,37] [46,48] [56,59] [60,65] [71,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 13: 10</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [60] <br>
+                    [23,46,56] [60,71] <br>
+                    [10,18,21] [23,37] [46,48] [56,59] [60,65] [71,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 14: 74</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [60] <br>
+                    [23,46,56] [60,71] <br>
+                    [10,18,21] [23,37] [46,48] [56,59] [60,65] [71,74,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 15: 78</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [60] <br>
+                    [23,46,56] [60,71] <br>
+                    [10,18,21] [23,37] [46,48] [56,59] [60,65] [71,74,78,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [60] <br>
+                    [23,46,56] [60,71,78] <br>
+                    [10,18,21] [23,37] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 16: 15</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [60] <br>
+                    [23,46,56] [60,71,78] <br>
+                    [10,15,18,21] [23,37] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [60] <br>
+                    [18,23,46,56] [60,71,78] <br>
+                    [10,15] [18,21] [23,37] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                  <h4>Split internal node with more than 4 pointers and promote smallest key in right node of the split</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23] [46,56] [60,71,78] <br>
+                    [10,15] [18,21] [23,37] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 17: 16</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23] [46,56] [60,71,78] <br>
+                    [10,15,16] [18,21] [23,37] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 18: 20</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23] [46,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,37] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 19: 24</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23] [46,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24,37] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 20: 28</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23] [46,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24,28,37] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23,28] [46,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24] [28,37] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 21: 39</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23,28] [46,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24] [28,37,39] [46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h4>Value 22: 43</h4>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23,28] [46,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24] [28,37,39] [43,46,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 23: 47</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23,28] [46,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24] [28,37,39] [43,46,47,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23,28] [46,47,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 24: 50</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23,28] [46,47,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48,50] [56,59] [60,65] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 25: 69</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23,28] [46,47,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48,50] [56,59] [60,65,69] [71,74] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 26: 75</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23,28] [46,47,56] [60,71,78] <br>
+                    [10,15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 27: 8</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [46,60] <br>
+                    [18,23,28] [46,47,56] [60,71,78] <br>
+                    [8,10,15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [46,60] <br>
+                    [15,18,23,28] [46,47,56] [60,71,78] <br>
+                    [8,10] [15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                  <h4>Split internal node with more than 4 pointers and promote smallest key in right node of the split</h4>
+                  <code>
+                    [23,46,60] <br>
+                    [15,18] [23,28] [46,47,56] [60,71,78] <br>
+                    [8,10] [15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 28: 49</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [23,46,60] <br>
+                    [15,18] [23,28] [46,47,56] [60,71,78] <br>
+                    [8,10] [15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48,49,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [23,46,60] <br>
+                    [15,18] [23,28] [46,47,49,56] [60,71,78] <br>
+                    [8,10] [15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48] [49,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                  <h4>Split internal node with more than 4 pointers and promote smallest key in right node of the split</h4>
+                  <code>
+                    [23,46,49,60] <br>
+                    [15,18] [23,28] [46,47] [49,56] [60,71,78] <br>
+                    [8,10] [15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48] [49,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                  <h4>Split internal node with more than 4 pointers and promote smallest key in right node of the split</h4>
+                  <code>
+                    [49] <br>
+                    [23,46] [49,60] <br>
+                    [15,18] [23,28] [46,47] [49,56] [60,71,78] <br>
+                    [8,10] [15,16] [18,20,21] [23,24] [28,37,39] [43,46] [47,48] [49,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 29: 33</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [49] <br>
+                    [23,46] [49,60] <br>
+                    [15,18] [23,28] [46,47] [49,56] [60,71,78] <br>
+                    [8,10] [15,16] [18,20,21] [23,24] [28,33,37,39] [43,46] [47,48] [49,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                  <h4>Split leaf with more than 3 part# and promote smallest key in right leaf of the split</h4>
+                  <code>
+                    [49] <br>
+                    [23,46] [49,60] <br>
+                    [15,18] [23,28,37] [46,47] [49,56] [60,71,78] <br>
+                    [8,10] [15,16] [18,20,21] [23,24] [28,33] [37,39] [43,46] [47,48] [49,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                </div>
+                <div style="text-align: center">
+                  <h3>Value 30: 38</h3>
+                  <h4>Add value</h4>
+                  <code>
+                    [49] <br>
+                    [23,46] [49,60] <br>
+                    [15,18] [23,28,37] [46,47] [49,56] [60,71,78] <br>
+                    [8,10] [15,16] [18,20,21] [23,24] [28,33] [37,38,39] [43,46] [47,48] [49,50] [56,59] [60,65,69] [71,74,75] [78,92] <br>
+                  </code>
+                </div>
+                
+                
+                
+                
+                
+              </div>
+            
+            </div>
+          </div>
+          
+          
+          <!-- End content area. -->
         </main>
         <footer>
           <!-- Your copyright information is only a suggestion and you can choose to delete it. -->

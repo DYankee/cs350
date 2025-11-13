@@ -374,9 +374,66 @@ Location: ~/gearyz/www/cs350/hw/HW09
 
           <div>
             <div class="lcars-text-bar">
-              <span></span>
+              <span>26.44.</span>
             </div>
-            <pre id="file-contents" onload="loadText('')"></pre>
+            <div>
+              <h2>
+                Consider the following rules:
+                REACHABLE(X, Y) :– FLIGHT(X, Y)
+                REACHABLE(X, Y) :– FLIGHT(X, Z), REACHABLE(Z, Y)
+                where REACHABLE(X, Y) means that city Y can be reached from city X, and
+                FLIGHT(X, Y) means that there is a flight to city Y from city X.
+              </h2>
+              <hr>
+              <div>
+                <h3>a. Construct fact predicates that describe the following:</h3>
+                <p>temp</p>
+              </div>
+              <div>
+                <h3>b. Is the given data cyclic? If so, in what sense?</h3>
+                <p>temp</p>
+              </div>
+              <div>
+                <h3>
+                  c. Construct a model-theoretic interpretation (that is, an interpretation similar to the one shown in Figure 26.13) of the above facts and rules.
+                </h3>
+                <p>temp</p>
+              </div>
+              <div>
+                <h3>d. Consider the query <br>
+                  REACHABLE(Atlanta, Sydney)? <br>
+                  How will this query be executed? List the series of steps it will go through.
+                </h3>
+                <p>temp</p>
+              </div>
+              <div>
+                <h3>
+                  e. Consider the following rule-defined predicates <br>
+                  ROUND-TRIP-REACHABLE(X, Y) :- <br>
+                  REACHABLE(X, Y), REACHABLE(Y, X) <br>
+                  DURATION(X, Y, Z) <br>
+                  Draw a predicate dependency graph for the above predicates. (Note: DURATION (X, Y, Z) means that you can take a flight from X to Y in Z hours.)
+                </h3>
+                <p>temp</p>
+              </div>
+              <div>
+                <h3>
+                  f. Consider the following query: What cities are reachable in 12 hours from Atlanta? Show how to express it in Datalog.
+                  Assume built-in predicates like greater-than(X, Y ). Can this be converted into a relational algebra statement in a straightforward way? Why or why not?
+                </h3>
+                <p>temp</p>>a. Construct fact predic
+              </div>
+              <div>
+                <h3>
+                  g. Consider the predicate population(X, Y), where Y is the population of
+                  city X. Consider the following query: List all possible bindings of the
+                  predicate pair (X, Y), where Y is a city that can be reached in two flights
+                  from city X, which has over 1 million people. Show this query in Datalog.
+                  Draw a corresponding query tree in relational algebraic terms.
+</h3>
+                <p>temp</p>
+              </div>
+            </div>
           </div>
 
             <!-- End content area. -->
