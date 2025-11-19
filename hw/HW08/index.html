@@ -386,17 +386,105 @@ Location: ~/gearyz/www/cs350/hw/HW08
               <hr>
               <div>
                 <h3>a. Fixed-length records with unspanned blocking</h3>
-                <h4>Header Info</h4>
-                <p>temp</p>
-                <h4>Program Code</h4>
+                <h4>Assumptions</h4>
                 <code>
-                  temp
+                  <ul>
+                    <li>File Structure: The file consists of a header followed by a series of fixed-size data blocks.</li>
+                    <li>Record Size: All records have the same, known length (RECORD_SIZE).</li>
+                    <li>Field Layout: All fields within a record have fixed, known lengths and are located at fixed offsets from the beginning of the record.</li>
+                    <li>Unspanned: RECORD_SIZE is less than or equal to BLOCK_SIZE. The number of records per block is an integer value (floor(BLOCK_SIZE / RECORD_SIZE)).</li>
+                    <li>Addressing: Records are addressed logically by their number (e.g., record 0, record 1, ...).</li>
+                  </ul>
+                </code>
+                <h4>Header Info</h4>
+                <code>
+                  <ul>
+                    <li>header_size: The total size of the header itself.</li>
+                    <li>record_size: The size of each record in bytes.</li>
+                    <li>block_size: The size of each data block in bytes.</li>
+                    <li>num_records: The total number of records in the file.</li>
+                    <li>field_count: The number of fields per record.</li>
+                    <li>field_metadata[]: An array of structures, one for each field, containing:
+                      <ul style="padding-left: 2rem">
+                        <li>field_name (e.g., "ID", "Name", "Major")</li>
+                        <li>field_offset (byte offset from the start of the record)</li>
+                        <li>field_length (size of the field in bytes)</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </code>
+                <h4>Program Code</h4>
+                <
+                <code>
+                  // Pseudocode to get a specific field from a specific record
+                  
+                  // Define metadata structures that would be read from the header
+                  struct FieldMeta {
+                  char name[32];
+                  int offset;
+                  int length;
+                  };
+                  
+                  struct FileHeader {
+                  int header_size;
+                  int record_size;
+                  int block_size;
+                  int num_records;
+                  int field_count;
+                  FieldMeta field_metadata[10]; // Assuming max 10 fields
+                  };
+                  
+                  // Function to access the field
+                  // file: file pointer/handle
+                  // record_num: the logical record number to access (0-indexed)
+                  // field_num: the logical field number to access (0-indexed)
+                  // output_buffer: a buffer to store the retrieved field data
+                  void getField_FixedUnspanned(File* file, int record_num, int field_num, char* output_buffer) {
+                  // 1. Read the file header to get metadata
+                  FileHeader header;
+                  file_seek(file, 0);
+                  file_read(file, &header, sizeof(FileHeader));
+                  
+                  // 2. Perform validation
+                  if (record_num >= header.num_records || field_num >= header.field_count) {
+                  // Handle error: record or field out of bounds
+                  return;
+                  }
+                  
+                  // 3. Calculate positioning
+                  int records_per_block = header.block_size / header.record_size;
+                  int target_block_index = record_num / records_per_block;
+                  int record_index_in_block = record_num % records_per_block;
+                  
+                  // 4. Calculate the byte offset to the start of the target block
+                  long block_start_offset = header.header_size + (target_block_index * header.block_size);
+                  
+                  // 5. Read the target block into memory
+                  char block_buffer[header.block_size];
+                  file_seek(file, block_start_offset);
+                  file_read(file, block_buffer, header.block_size);
+                  
+                  // 6. Calculate the start of the record within the block buffer
+                  int record_start_in_block = record_index_in_block * header.record_size;
+                  
+                  // 7. Get the target field's metadata from the header info
+                  FieldMeta target_field = header.field_metadata[field_num];
+                  int field_start_in_record = target_field.offset;
+                  int field_length = target_field.length;
+                  
+                  // 8. Calculate the final position of the field data in our block buffer
+                  char* field_data_ptr = block_buffer + record_start_in_block + field_start_in_record;
+                  
+                  // 9. Copy the field data to the output buffer
+                  memcpy(output_buffer, field_data_ptr, field_length);
+                  output_buffer[field_length] = '\0'; // Null-terminate if it's a string
+                  }
                 </code>
               </div>
               <div>
                 <h3>b. Fixed-length records with spanned blocking</h3>
                 <h4>Header Info</h4>
-                <p>temp</p>
+                <code>temp</code>
                 <h4>Program Code</h4>
                 <code>
                   temp
